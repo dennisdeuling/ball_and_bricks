@@ -3,9 +3,6 @@ canvas.width = 1500;
 canvas.height = 700;
 const context = canvas.getContext('2d');
 
-
-
-
 /* 
 const firstRow = new Bricks(100, 50, 30, 30);
 const secondRow = new Bricks(100, 100, 30, 30);
