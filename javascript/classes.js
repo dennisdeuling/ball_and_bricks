@@ -8,8 +8,8 @@ class Bar {
         this.height = height;
         this.posX = posX;
         this.posY = posY;
-        this.posDX = 5;
-        this.posDY = 5;
+        this.posDX = 20;
+        this.posDY = 20;
         this.color = 'Black';
     }
     draw() {
@@ -18,21 +18,25 @@ class Bar {
     }
     update() {
         this.draw();
+    }
+    moveLeft() {
+        if (!(0 > this.posX)) {
+            this.posX -= 30;
+        }
+    }
+    moveRight() {
+        if (!(canvas.width < (this.posX + this.width + 30))) {
+            this.posX += 30;
+        }
+    }
+    updateAutmatically() {
+        this.draw();
 
-        /*
         if (canvas.width < (this.posX + this.width) || 0 > this.posX) {
             this.posDX = -this.posDX;
         }
         this.posX += this.posDX;
-        */
     }
-    moveLeft() {
-        this.posX -= 30;
-    }
-    moveRight() {
-        this.posX += 30;
-    }
-
 }
 
 
@@ -75,7 +79,6 @@ class Ball {
         }
         this.posX += this.posDX;
         this.posY += this.posDY;
-
     }
 }
 
@@ -83,7 +86,7 @@ class Ball {
 /************ Class Bricks ************/
 /**************************************/
 
-class Bricks {
+class Brick {
     constructor(posX, posY, width, height, color) {
         this.posX = posX;
         this.posY = posY;
@@ -91,20 +94,8 @@ class Bricks {
         this.height = height;
         this.color = color;
     }
-    draw() {
-            context.fillStyle = this.color;
-            context.fillRect(this.posX, this.posY, this.width, this.height);
-        }
-        /*     buildRow(colorArray, length) {
-                for (let i = 0; i < length; i++) {
-                    this.colorArray = colorArray;
-                    const colorIndex = Math.floor(Math.random() * this.colorArray.length);
-                    let newBrick = new Bricks(this.posX, this.posY, this.width, this.height, this.colorArray[colorIndex]);
-                    this.rowBrick.push(newBrick.draw());
-                    this.posX += this.width;
-                }
-            } */
-    destroyed() {
-
+    draw(posX, posY, width, height, color) {
+        context.fillStyle = color;
+        context.fillRect(posX, posY, width, height);
     }
 }
