@@ -19,18 +19,22 @@ class Bar {
     update() {
         this.draw();
 
+        /*
         if (canvas.width < (this.posX + this.width) || 0 > this.posX) {
             this.posDX = -this.posDX;
         }
         this.posX += this.posDX;
+        */
     }
     moveLeft() {
-        this.posX -= 10;
+        this.posX -= 30;
     }
     moveRight() {
-        this.posX += 10;
+        this.posX += 30;
     }
+
 }
+
 
 /************************************/
 /************ Class Ball ************/

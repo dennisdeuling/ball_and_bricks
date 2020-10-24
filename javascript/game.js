@@ -18,13 +18,14 @@ function gameLoop() {
 gameLoop();
 
 window.addEventListener('keydown', event => {
-    console.log(event);
-    if (event.keyCode == 37) {
-        buttomBar.update();
+    switch (event.keyCode) {
+        case 37:
+            bottomBar.moveLeft();
+            break;
+        case 39:
+            bottomBar.moveRight();
     }
-    if (event.keyCode == 39) {
-        console.log('rightArrow');
-    }
+
 });
 
 
