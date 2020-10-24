@@ -17,9 +17,6 @@ function gameLoop() {
 
 gameLoop();
 
-
-
-
 window.addEventListener('keydown', event => {
     console.log(event);
     if (event.keyCode == 37) {
@@ -29,23 +26,6 @@ window.addEventListener('keydown', event => {
         console.log('rightArrow');
     }
 });
-
-// function animateBall() {
-//     requestAnimationFrame(animateBall);
-//     myBall.update();
-// }
-
-
-// function animateBar() {
-//     requestAnimationFrame(animateBar);
-//     bottomBar.update();
-
-// }
-
-
-
-
-
 
 
 
