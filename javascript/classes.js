@@ -17,13 +17,18 @@ class Bar {
         context.fillRect(this.posX, this.posY, this.width, this.height);
     }
     update() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
         this.draw();
 
         if (canvas.width < (this.posX + this.width) || 0 > this.posX) {
             this.posDX = -this.posDX;
         }
         this.posX += this.posDX;
+    }
+    moveLeft() {
+        this.posX -= 10;
+    }
+    moveRight() {
+        this.posX += 10;
     }
 }
 
@@ -35,9 +40,9 @@ class Bar {
 class Ball {
     constructor(posX, posY, radius, color) {
         this.posX = posX;
+        this.posY = posY;
         this.posDX = 10;
         this.posDY = 10;
-        this.posY = posY;
         this.radius = radius;
         this.color = 'Red';
         this.startAngle = 0;
@@ -50,8 +55,7 @@ class Ball {
         context.fill();
         context.closePath();
     }
-    update() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+    update(input) {
         this.draw();
 
         if (canvas.width < (this.posX + this.radius) || 0 > (this.posX - this.radius)) {
@@ -59,6 +63,10 @@ class Ball {
         }
 
         if (canvas.height < (this.posY + this.radius) || 0 > (this.posY - this.radius)) {
+            this.posDY = -this.posDY;
+        }
+
+        if (this.posX <= (input.posX + input.width) && (this.posY - this.radius) == (input.posY - this.radius)) {
             this.posDY = -this.posDY;
         }
         this.posX += this.posDX;

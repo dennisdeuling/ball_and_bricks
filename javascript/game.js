@@ -3,6 +3,61 @@ canvas.width = 1500;
 canvas.height = 700;
 const context = canvas.getContext('2d');
 
+const bottomBar = new Bar(500, 650, 400, 25);
+
+const myBall = new Ball(900, 650, 20);
+
+
+function gameLoop() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    bottomBar.update();
+    myBall.update(bottomBar);
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+
+
+
+window.addEventListener('keydown', event => {
+    console.log(event);
+    if (event.keyCode == 37) {
+        buttomBar.update();
+    }
+    if (event.keyCode == 39) {
+        console.log('rightArrow');
+    }
+});
+
+// function animateBall() {
+//     requestAnimationFrame(animateBall);
+//     myBall.update();
+// }
+
+
+// function animateBar() {
+//     requestAnimationFrame(animateBar);
+//     bottomBar.update();
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 
 const firstRow = new Bricks(100, 50, 30, 30);
 const secondRow = new Bricks(100, 100, 30, 30);
@@ -13,7 +68,7 @@ secondRow.buildRow(myColors, 30);
 thirdRow.buildRow(myColors, 15);
  */
 
-
+/*
 function rowBuilderBricks(colorArray, length, x, y, width, height) {
     let rowBricks = [];
 
@@ -63,7 +118,7 @@ const allBlocks = buildAllBlocks(firstRow);
 console.log(firstRow);
 
 console.log(allBlocks);
-
+*/
 /* var rowBrick = [];
 let x = 100;
 let y = 50;
@@ -78,32 +133,3 @@ for (let i = 0; i < 40; i++) {
     x += width;
 }
 console.log(rowBrick); */
-
-
-
-
-
-
-
-/*
-
-const bottomBar = new Bar(500, 650, 400, 25);
-
-const myBall = new Ball(300, 300, 20);
-
-
-function animateBall() {
-    requestAnimationFrame(animateBall);
-    myBall.update();
-}
-
-
-function animateBar() {
-    requestAnimationFrame(animateBar);
-    bottomBar.update();
-    // myBall.update();
-}
-
-animateBar();
-
-*/
