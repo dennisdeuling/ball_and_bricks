@@ -165,14 +165,14 @@ class Ball {
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = 'White';
         context.font = '50px Georgia';
-        context.fillText('Yay, you won! Please refresh to start again', canvas.width / 5.3, canvas.height / 2);
+        context.fillText('Yay, you won! Please push N to start again', canvas.width / 5.3, canvas.height / 2);
     }
     loose() {
         context.fillStyle = 'Black';
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = 'White';
         context.font = '50px Georgia';
-        context.fillText('You lost, please refresh and try again!', canvas.width / 4.3, canvas.height / 2);
+        context.fillText('You lost, please push N and try again!', canvas.width / 4.3, canvas.height / 2);
     }
     start() {
         context.fillStyle = 'White';

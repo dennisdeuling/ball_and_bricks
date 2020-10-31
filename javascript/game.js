@@ -42,6 +42,9 @@ window.addEventListener('keydown', event => {
         case 32:
             myBall.startGame = true;
             break;
+        case 78:
+            location.reload();
+            break;
         default:
             console.log('Not the right input');
             break;
