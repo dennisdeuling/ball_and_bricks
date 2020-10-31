@@ -9,13 +9,12 @@ const myBall = new Ball(15);
 
 let allBricks = saveBricks(100, 100, 80, 50, 30);
 
-const soundBricks = new Sound('../sounds/bricks.wav');
+const soundBricks = new Sound('./sounds/bricks.wav');
 
-const soundBoundaries = new Sound('../sounds/boundaries.mp3');
+const soundBoundaries = new Sound('./sounds/boundaries.mp3');
 
 
 function gameLoop() {
-
     if (!myBall.startGame && !myBall.gameOver) {
         myBall.start();
     } else if (!myBall.gameOver) {
@@ -31,7 +30,6 @@ function gameLoop() {
 }
 
 gameLoop();
-
 
 window.addEventListener('keydown', event => {
     switch (event.keyCode) {
