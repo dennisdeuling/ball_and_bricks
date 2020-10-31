@@ -1,4 +1,12 @@
 #canvas {
-    border: 5px solid red;
-    background-color: rgba(0, 0, 0, 0.249);
+    border: 3px dotted black;
+    background: url("../images/zack-stella-zackstella-mtg-flooded-strand.jpg");
+}
+
+.flex {
+    width: 1500px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }

@@ -5,46 +5,33 @@ const context = canvas.getContext('2d');
 
 const bottomBar = new Bar(500, 650, 400, 25);
 
-const myBall = new Ball(900, 650, 20);
+const myBall = new Ball(900, 300, 15);
 
-const colors = ['Yellow', 'Red'];
-
-const arrayBricks = [];
-
-function saveBricks(startX, startY, width, height, color, storeBricks, amount) {
-    for (i = 0; i < amount; i++) {
-        startX += width;
-        colorIndex = Math.floor(Math.random() * color.length);
-        let brick = new Brick(startX, startY, width, height, color[colorIndex]);
-        storeBricks.push(brick);
-    }
-}
-
-saveBricks(100, 100, 30, 30, colors, arrayBricks, 30);
-
-function drawRowBricks(bricks) {
-    for (i = 0; i < bricks.length; i++) {
-        bricks[i].draw(bricks[i].posX, bricks[i].posY, bricks[i].width, bricks[i].height, bricks[i].color);
-    }
-}
-
-function checkBrick(bricks, object) {
-    for (i = 0; i < bricks.length; i++) {
-        object.update(bricks[i]);
-    }
-}
-
-
+let allBricks = saveBricks(100, 100, 80, 50, 30);
 
 function gameLoop() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    bottomBar.updateAutmatically();
-    myBall.update(bottomBar);
-    drawRowBricks(arrayBricks);
-    requestAnimationFrame(gameLoop);
+    if (myBall.gameOver && allBricks.length == 0) {
+        context.fillStyle = 'Red';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'White';
+        context.font = '100px Georgia';
+        context.fillText('Yay, you won!', canvas.width / 3.5, canvas.height / 2);
+    } else if (myBall.gameOver) {
+        context.fillStyle = 'Black';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'White';
+        context.font = '50px Georgia';
+        context.fillText('You lost, please try again!', canvas.width / 3.5, canvas.height / 2);
+    } else {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        bottomBar.update();
+        myBall.update(bottomBar, allBricks);
+        requestAnimationFrame(gameLoop);
+    }
 }
 
 gameLoop();
+
 
 window.addEventListener('keydown', event => {
     switch (event.keyCode) {
