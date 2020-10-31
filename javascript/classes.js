@@ -34,6 +34,23 @@ function drawBricks(bricks) {
     });
 }
 
+class Sound {
+    constructor(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+    }
+    play() {
+        this.sound.play();
+    }
+    stop() {
+        this.sound.pause();
+    }
+}
+
 
 /***********************************/
 /************ Class Bar ************/
@@ -76,9 +93,9 @@ class Bar {
 
 
 class Ball {
-    constructor(posX, posY, radius) {
-        this.posX = posX;
-        this.posY = posY;
+    constructor(radius) {
+        this.posX = Math.floor(Math.random() * 1500);
+        this.posY = Math.floor(Math.random() * (300 - 200 + 1)) + 200;
         this.posDX = 5;
         this.posDY = 5;
         this.radius = radius;
@@ -86,6 +103,7 @@ class Ball {
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.gameOver = false;
+        this.startGame = false;
     }
     draw() {
         context.beginPath();
@@ -101,20 +119,31 @@ class Ball {
         // canva boundary left and right
         if (canvas.width < (this.posX + this.radius) || 0 > (this.posX - this.radius)) {
             this.posDX = -this.posDX;
+            soundBoundaries.stop();
+            soundBoundaries.play();
         }
-        // canva boundary top and bottom
+        // canva boundary top
         if (0 > (this.posY - this.radius)) {
             this.posDY = -this.posDY;
+            soundBoundaries.stop();
+            soundBoundaries.play();
+
         }
         this.posX += this.posDX;
         this.posY += this.posDY;
 
         if (collisionDetection(this, paddle)) {
             this.posDY = -this.posDY;
+            soundBoundaries.stop();
+            soundBoundaries.play();
+
+
         }
         for (let i = 0; i < bricks.length; i++) {
             if (collisionDetection(this, bricks[i])) {
                 this.posDY = -this.posDY;
+                soundBricks.stop();
+                soundBricks.play();
                 bricks[i].deletion = true;
             }
         }
@@ -130,6 +159,25 @@ class Ball {
         if (bricks.length == 0) {
             this.gameOver = true;
         }
+    }
+    won() {
+        context.fillStyle = 'Red';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'White';
+        context.font = '50px Georgia';
+        context.fillText('Yay, you won! Please refresh to start again', canvas.width / 5.3, canvas.height / 2);
+    }
+    loose() {
+        context.fillStyle = 'Black';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'White';
+        context.font = '50px Georgia';
+        context.fillText('You lost, please refresh and try again!', canvas.width / 4.3, canvas.height / 2);
+    }
+    start() {
+        context.fillStyle = 'White';
+        context.font = '50px Georgia';
+        context.fillText('Please press the Spacebar to start!', canvas.width / 4, canvas.height / 2);
     }
 }
 
